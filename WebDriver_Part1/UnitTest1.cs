@@ -69,7 +69,7 @@ namespace WebDriver_Part1
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@data-mnemo='saveStatus']")));
 
-            IWebElement successMessage = driver.FindElement(By.XPath("//div[@data-mnemo='saveStatus']"));            
+            IWebElement successMessage = driver.FindElement(By.XPath("//div[@data-mnemo='saveStatus']"));
             Assert.IsTrue(successMessage.Displayed, "Message is not present");
         }
 

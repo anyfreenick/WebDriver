@@ -54,11 +54,20 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="PageObjects\BasePage.cs" />
+    <Compile Include="PageObjects\DraftsPage.cs" />
+    <Compile Include="PageObjects\HomePage.cs" />
+    <Compile Include="PageObjects\LoginPage.cs" />
+    <Compile Include="PageObjects\NewEmailPage.cs" />
+    <Compile Include="PageObjects\PageObjectPatternTests.cs" />
+    <Compile Include="PageObjects\SentPage.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
