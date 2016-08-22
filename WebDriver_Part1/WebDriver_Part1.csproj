@@ -68,7 +68,6 @@
     <Compile Include="PageObjects\NewEmailPage.cs" />
     <Compile Include="PageObjects\PageObjectPatternTests.cs" />
     <Compile Include="PageObjects\SentPage.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
