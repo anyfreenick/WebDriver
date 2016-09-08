@@ -40,6 +40,7 @@ namespace WebDriver_Part1.PageObjects
             SentPage sentpage = homepage.GoToSentPage();
             Assert.IsTrue(sentpage.CheckEmailSent(bodyEmail), "Sent folder is empty, no email was sent");
             homepage.LogOff();
+            driver.Quit();
         }
     }
 }
