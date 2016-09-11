@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium;
@@ -8,17 +6,11 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebDriver_Part1.PageObjects
 {
-    /// <summary>
-    /// Summary description for RemoteTests
-    /// </summary>
     [TestClass]
     public class RemoteTests
     {
         private const string login = "webdriver_csharp";
         private const string password = "UnitTestingFramework";
-        private const string toEmail = "docent.86@mail.ru";
-        private const string subjEmail = "Hello from webdriver";
-        private const string bodyEmail = "Hello!!!\n\rThis email is sent automatically by selenium WebDriver!\n\rBest regards,\n\rSelenuim WebDriver.";
         private const string WDHub = "http://localhost:4444/wd/hub";
 
         private IWebDriver driver;

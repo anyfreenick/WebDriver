@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 
 namespace WebDriver_Part1.PageObjects
@@ -54,6 +50,11 @@ namespace WebDriver_Part1.PageObjects
         }
 
         public void LogOff()
+        {
+            LogOffButton.Click();
+        }
+
+        public void LogOffWithHihgLight()
         {
             HighLightLogOffButton();
             LogOffButton.Click();
