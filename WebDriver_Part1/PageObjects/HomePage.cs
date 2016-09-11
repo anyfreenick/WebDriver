@@ -67,7 +67,7 @@ namespace WebDriver_Part1.PageObjects
             System.Threading.Thread.Sleep(TimeSpan.FromSeconds(5));
         }
 
-        public bool LogedIn()
+        public bool LoggedIn()
         {
             if (LogOffButton.Displayed)
                 return true;

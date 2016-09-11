@@ -14,8 +14,7 @@ namespace WebDriver_Part1.PageObjects
         private const string password = "UnitTestingFramework";
         private const string toEmail = "docent.86@mail.ru";
         private const string subjEmail = "Hello from webdriver";
-        private const string bodyEmail = "Hello!!!\n\rThis email is sent automatically by selenium WebDriver!\n\rBest regards,\n\rSelenuim WebDriver.";
-        private const string WDHub = "http://localhost:4444/wd/hub";
+        private const string bodyEmail = "Hello!!!\n\rThis email is sent automatically by selenium WebDriver!\n\rBest regards,\n\rSelenuim WebDriver.";        
 
         IWebDriver driver;
         
@@ -28,7 +27,7 @@ namespace WebDriver_Part1.PageObjects
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
             HomePage homepage = loginpage.LoginAs(login, password);
-            Assert.IsTrue(homepage.LogedIn(), "Login failed");
+            Assert.IsTrue(homepage.LoggedIn(), "Login failed");
             NewEmailPage newemail = homepage.CreateEmail();
             newemail.ComposeEmailAndSaveDraft(toEmail, subjEmail, bodyEmail);
             //No any other waits handled this, only hardcoded wait
@@ -54,38 +53,12 @@ namespace WebDriver_Part1.PageObjects
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
             HomePage homepage = loginpage.LoginAs(login, password);
-            Assert.IsTrue(homepage.LogedIn(), "Login failed");
+            Assert.IsTrue(homepage.LoggedIn(), "Login failed");
             homepage.LogOff();
             Assert.IsTrue(loginpage.LoggedOut(), "Log off failed");
             driver.Quit();
         }
 
-        [TestMethod]
-        public void RemoteWDTestOnWin()
-        {
-            DesiredCapabilities capabilities = DesiredCapabilities.Firefox();
-            capabilities.SetCapability(CapabilityType.BrowserName, "firefox");
-            capabilities.SetCapability(CapabilityType.Platform, new Platform(PlatformType.Windows));
-            driver = new RemoteWebDriver(new Uri(WDHub), capabilities);
-            LoginPage loginpage = new LoginPage(driver);
-            loginpage.Open();
-            HomePage homepage = loginpage.LoginAs(login, password);
-            Assert.IsTrue(homepage.LogedIn(), "Login failed");
-        }
-
-        [TestMethod]
-        public void RemoteWDTestOnLinux()
-        {
-            DesiredCapabilities capabilities = DesiredCapabilities.Firefox();
-            capabilities.SetCapability(CapabilityType.BrowserName, "firefox");
-            capabilities.SetCapability(CapabilityType.Platform, new Platform(PlatformType.Linux));
-            driver = new RemoteWebDriver(new Uri(WDHub), capabilities);
-            LoginPage loginpage = new LoginPage(driver);
-            loginpage.Open();
-            HomePage homepage = loginpage.LoginAs(login, password);
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            wait.Until
-            Assert.IsTrue(homepage.LogedIn(), "Login failed");
-        }
+        
     }
 }
