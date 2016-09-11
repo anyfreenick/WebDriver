@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.UI;
 
 namespace WebDriver_Part1.PageObjects
 {
@@ -82,7 +83,8 @@ namespace WebDriver_Part1.PageObjects
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
             HomePage homepage = loginpage.LoginAs(login, password);
-            System.Threading.Thread.Sleep(5000);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.Until
             Assert.IsTrue(homepage.LogedIn(), "Login failed");
         }
     }
