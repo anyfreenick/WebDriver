@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace WebDriver_Part1.PageObjects
 {
@@ -9,7 +10,7 @@ namespace WebDriver_Part1.PageObjects
         {
         }
 
-        public IWebElement ComposeButton
+        private IWebElement ComposeButton
         {
             get { return GetDriver().FindElement(By.XPath("//a[@data-name='compose']")); }
         }
@@ -32,6 +33,12 @@ namespace WebDriver_Part1.PageObjects
         public NewEmailPage CreateEmail()
         {
             ComposeButton.Click();
+            return new NewEmailPage(GetDriver());
+        }
+
+        public NewEmailPage CreateEmailViaAction()
+        {
+            new Actions(GetDriver()).Click(ComposeButton).Build().Perform();
             return new NewEmailPage(GetDriver());
         }
 

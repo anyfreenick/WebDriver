@@ -64,9 +64,10 @@ namespace WebDriver_Part1.PageObjects
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
-            HomePage homepage = loginpage.LoginAs(login, password);
+            //Login button is being clicked with Javascript
+            HomePage homepage = loginpage.LoginUsingJSClick(login, password);
             Assert.IsTrue(homepage.LoggedIn(), "Login failed");
-            NewEmailPage newemail = homepage.CreateEmail();
+            NewEmailPage newemail = homepage.CreateEmailViaAction();
             newemail.ComposeEmailAndSaveDraft(toEmail, subjEmail, bodyEmail);
             //No any other waits handled this, only hardcoded wait
             System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));

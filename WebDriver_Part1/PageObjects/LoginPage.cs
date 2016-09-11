@@ -53,5 +53,14 @@ namespace WebDriver_Part1.PageObjects
             else
                 return false;
         }
+
+        public HomePage LoginUsingJSClick(string username, string password)
+        {
+            LoginField.SendKeys(username);
+            PasswordField.SendKeys(password);
+            IJavaScriptExecutor js = GetDriver() as IJavaScriptExecutor;
+            js.ExecuteScript("document.getElementById('mailbox__auth__button').click()");
+            return new HomePage(GetDriver());
+        }
     }
 }
