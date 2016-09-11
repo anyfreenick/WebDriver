@@ -45,5 +45,13 @@ namespace WebDriver_Part1.PageObjects
             LoginButton.Click();
             return new HomePage(GetDriver());
         }
+
+        public bool LoggedOut()
+        {
+            if (LoginButton.Displayed)
+                return true;
+            else
+                return false;
+        }
     }
 }

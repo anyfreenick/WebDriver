@@ -55,7 +55,24 @@ namespace WebDriver_Part1.PageObjects
 
         public void LogOff()
         {
+            HighLightLogOffButton();
             LogOffButton.Click();
+        }
+
+        private void HighLightLogOffButton()
+        {
+            IJavaScriptExecutor js = GetDriver() as IJavaScriptExecutor;            
+            js.ExecuteScript("arguments[0].style.backgroundColor = 'red'", LogOffButton);
+            //this wait is used to see that log off button is highlighted
+            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(5));
+        }
+
+        public bool LogedIn()
+        {
+            if (LogOffButton.Displayed)
+                return true;
+            else
+                return false;
         }
     }
 }

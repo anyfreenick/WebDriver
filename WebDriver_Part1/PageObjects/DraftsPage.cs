@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Interactions;
 
 namespace WebDriver_Part1.PageObjects
 {
@@ -62,6 +64,20 @@ namespace WebDriver_Part1.PageObjects
             if (SendButton.Displayed)
             {
                 SendButton.Click();
+                if (IsElementPresent(By.XPath("//div[@class='message-sent__title']")))
+                    return true;
+                return false;
+            }
+            return false;
+        }
+
+        public bool SendEmailByKeyBoard()
+        {
+            if (SendButton.Displayed)
+            {
+                
+                //this action emulated pressing ctrl+enter for sendin email
+                new Actions(GetDriver()).KeyDown(Keys.Control).SendKeys(Keys.Enter).KeyUp(Keys.Control).Build().Perform();
                 if (IsElementPresent(By.XPath("//div[@class='message-sent__title']")))
                     return true;
                 return false;
