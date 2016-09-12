@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
 using WebDriver_Part1.PageObjects;
 
 namespace WebDriver_Part1.tests
@@ -11,6 +12,7 @@ namespace WebDriver_Part1.tests
     {
         private const string login = "webdriver_csharp";
         private const string password = "UnitTestingFramework";
+        private const string domain = "bk.ru";
         private const string toEmail = "docent.86@mail.ru";
         private const string subjEmail = "Hello from webdriver";
         private const string bodyEmail = "Hello!!!\n\rThis email is sent automatically by selenium WebDriver!\n\rBest regards,\n\rSelenuim WebDriver.";        
@@ -21,7 +23,7 @@ namespace WebDriver_Part1.tests
         [TestMethod]
         public void RunPageObjectTest()
         {
-            driver = new FirefoxDriver();
+            driver = new ChromeDriver();
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
@@ -51,7 +53,7 @@ namespace WebDriver_Part1.tests
             driver = new FirefoxDriver();
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
-            HomePage homepage = loginpage.LoginAs(login, password);
+            HomePage homepage = loginpage.LoginAs(login, password, domain);
             Assert.IsTrue(homepage.LoggedIn(), "Login failed");
             homepage.LogOff();
             Assert.IsTrue(loginpage.LoggedOut(), "Log off failed");
