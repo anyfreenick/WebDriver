@@ -76,11 +76,15 @@
     <Compile Include="PageObjects\SentPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tests\RemoteTests.cs" />
+    <Compile Include="tests\TestBusinessObjects.cs" />
     <Compile Include="Utils\ConfigParser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Config.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="Conf\Letters.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Conf\Logins.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
