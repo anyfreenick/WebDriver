@@ -2,8 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using WebDriver_Part1.PageObjects;
 
-namespace WebDriver_Part1.PageObjects
+namespace WebDriver_Part1.tests
 {
     [TestClass]
     public class PageObjectPatternTests

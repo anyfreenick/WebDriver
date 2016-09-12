@@ -3,8 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using WebDriver_Part1.PageObjects;
 
-namespace WebDriver_Part1.PageObjects
+namespace WebDriver_Part1.tests
 {
     [TestClass]
     public class RemoteTests
