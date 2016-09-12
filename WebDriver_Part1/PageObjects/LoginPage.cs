@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 
 namespace WebDriver_Part1.PageObjects
 {
@@ -32,16 +31,28 @@ namespace WebDriver_Part1.PageObjects
             get { return GetDriver().FindElement(By.Id("mailbox__auth__button")); }
         }
 
+        private IWebElement DomainComboBox
+        {
+            get { return GetDriver().FindElement(By.Id("mailbox__login__domain")); }
+        }
+
+        private void SelectDomain(string domain)
+        {
+            var domainSelect = new SelectElement(DomainComboBox);
+            domainSelect.SelectByValue(domain);
+        }
+
         public void Open()
         {
             GetDriver().Navigate().GoToUrl(url);
             GetDriver().Manage().Window.Maximize();
         }
 
-        public HomePage LoginAs(string username, string password)
+        public HomePage LoginAs(string username, string password, string domain = "mail.ru")
         {
             LoginField.SendKeys(username);
             PasswordField.SendKeys(password);
+            SelectDomain(domain);
             LoginButton.Click();
             return new HomePage(GetDriver());
         }
@@ -54,10 +65,11 @@ namespace WebDriver_Part1.PageObjects
                 return false;
         }
 
-        public HomePage LoginUsingJSClick(string username, string password)
+        public HomePage LoginUsingJSClick(string username, string password, string domain = "mail.ru")
         {
             LoginField.SendKeys(username);
             PasswordField.SendKeys(password);
+            SelectDomain(domain);
             IJavaScriptExecutor js = GetDriver() as IJavaScriptExecutor;
             js.ExecuteScript("document.getElementById('mailbox__auth__button').click()");
             return new HomePage(GetDriver());

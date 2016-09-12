@@ -79,6 +79,9 @@
     <Compile Include="Utils\ConfigParser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Config.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

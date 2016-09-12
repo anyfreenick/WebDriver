@@ -12,6 +12,7 @@ namespace WebDriver_Part1.tests
     {
         private const string login = "webdriver_csharp";
         private const string password = "UnitTestingFramework";
+        private const string domain = "bk.ru";
         private const string WDHub = "http://localhost:4444/wd/hub";
 
         private IWebDriver driver;
@@ -38,7 +39,7 @@ namespace WebDriver_Part1.tests
             driver = new RemoteWebDriver(new Uri(WDHub), capabilities);
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
-            HomePage homepage = loginpage.LoginAs(login, password);
+            HomePage homepage = loginpage.LoginAs(login, password, domain);
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementIsVisible(By.Id("PH_logoutLink")));
             Assert.IsTrue(homepage.LoggedIn(), "Login failed");
