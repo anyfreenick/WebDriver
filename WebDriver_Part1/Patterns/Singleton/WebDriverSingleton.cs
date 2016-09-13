@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.IE;
 
 namespace WebDriver_Part1.Patterns.Singleton
 {
@@ -12,16 +9,33 @@ namespace WebDriver_Part1.Patterns.Singleton
     {
         private static IWebDriver _webdriver;
 
-        private static WebDriverSingleton _driver = new WebDriverSingleton();
+        private static WebDriverSingleton instance;
 
-        private WebDriverSingleton()
+        private WebDriverSingleton() { }
+        
+        public static WebDriverSingleton GetInstance(DriverType drivertype)
         {
-            _webdriver = new FirefoxDriver();
-        }
+            if (instance == null)
+            {
+                instance = new WebDriverSingleton();
+                switch (drivertype)
+                {
+                    case DriverType.Firefox:
+                        instance.Driver = new FirefoxDriver();
+                        break;
+                    case DriverType.Chrome:
+                        instance.Driver = new ChromeDriver();
+                        break;
+                    case DriverType.InternetExplorer:
+                        instance.Driver = new InternetExplorerDriver();
+                        break;
+                    default:
+                        instance.Driver = new FirefoxDriver();
+                        break;
 
-        public static WebDriverSingleton GetInstance()
-        {
-            return _driver;
+                }
+            }
+            return instance;
         }
 
         public IWebDriver Driver
@@ -29,5 +43,11 @@ namespace WebDriver_Part1.Patterns.Singleton
             private set { _webdriver = value; }
             get { return _webdriver; }
         }
+    }
+    public enum DriverType
+    {
+        Firefox,
+        Chrome,
+        InternetExplorer
     }
 }
