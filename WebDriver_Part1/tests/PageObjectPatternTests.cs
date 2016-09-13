@@ -14,7 +14,8 @@ namespace WebDriver_Part1.tests
         private const string domain = "bk.ru";
         private const string toEmail = "docent.86@mail.ru";
         private const string subjEmail = "Hello from webdriver";
-        private const string bodyEmail = "Hello!!!\n\rThis email is sent automatically by selenium WebDriver!\n\rBest regards,\n\rSelenuim WebDriver.";        
+        private const string bodyEmail = "Hello!!!\n\rThis email is sent automatically by selenium WebDriver!\n\rBest regards,\n\rSelenuim WebDriver.";
+        private string xpathEmptyDraftFolder = "//div[@class='b-datalist__empty__block']";
 
         IWebDriver driver;
 
@@ -42,7 +43,7 @@ namespace WebDriver_Part1.tests
             Assert.IsTrue(draftpage.CheckDraftContent(toEmail, bodyEmail), "Error in draft content");
             Assert.IsTrue(draftpage.SendEmail(), "Error while sending email");
             homepage.GoToDraftsFolder();
-            Assert.IsTrue(draftpage.IsElementPresent(By.XPath("//div[@class='b-datalist__empty__block']")), "Email was not sent");
+            Assert.IsTrue(draftpage.IsElementPresent(By.XPath(xpathEmptyDraftFolder)), "Email was not sent");
             SentPage sentpage = homepage.GoToSentPage();
             Assert.IsTrue(sentpage.CheckEmailSent(bodyEmail), "Sent folder is empty, no email was sent");
             homepage.LogOff();
@@ -79,7 +80,7 @@ namespace WebDriver_Part1.tests
             //Email is sent by pressing ctrl+enter buttons on the keyboard
             Assert.IsTrue(draftpage.SendEmailByKeyBoard(), "Error while sending email");
             homepage.GoToDraftsFolder();
-            Assert.IsTrue(draftpage.IsElementPresent(By.XPath("//div[@class='b-datalist__empty__block']")), "Email was not sent");
+            Assert.IsTrue(draftpage.IsElementPresent(By.XPath(xpathEmptyDraftFolder)), "Email was not sent");
             SentPage sentpage = homepage.GoToSentPage();
             Assert.IsTrue(sentpage.CheckEmailSent(bodyEmail), "Sent folder is empty, no email was sent");
             //Before clicking logoff button, the button is highlighted with red color

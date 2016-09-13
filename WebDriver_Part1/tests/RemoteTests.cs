@@ -16,8 +16,9 @@ namespace WebDriver_Part1.tests
         private const string WDHub = "http://localhost:4444/wd/hub";
 
         private IWebDriver driver;
+        private DesiredCapabilities capabilities;
 
-        DesiredCapabilities capabilities;
+        private string IDLogoutButton = "PH_logoutLink";
 
         [TestInitialize]
         public void TestSetup()
@@ -47,7 +48,7 @@ namespace WebDriver_Part1.tests
             loginpage.Open();
             HomePage homepage = loginpage.LoginAs(login, password, domain);
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("PH_logoutLink")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id(IDLogoutButton)));
             Assert.IsTrue(homepage.LoggedIn(), "Login failed");
             homepage.LogOff();
             Assert.IsTrue(loginpage.LoggedOut(), "Log off failed");

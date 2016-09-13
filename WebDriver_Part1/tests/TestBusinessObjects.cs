@@ -10,9 +10,13 @@ namespace WebDriver_Part1.tests
     [TestClass]
     public class TestBusinessObjects
     {
-        IWebDriver driver;
-        User user;
-        Letter letter;
+        // Business objects
+        private IWebDriver driver;
+        private User user;
+        private Letter letter;
+
+        // Locators
+        private string xpathEmptyDraftFolder = "//div[@class='b-datalist__empty__block']";
 
         [TestInitialize]
         public void TestSetup()
@@ -40,7 +44,7 @@ namespace WebDriver_Part1.tests
             Assert.IsTrue(draftpage.CheckDraftContent(letter.Addressee, letter.Body), "Error in draft content");
             Assert.IsTrue(draftpage.SendEmail(), "Error while sending email");
             homepage.GoToDraftsFolder();
-            Assert.IsTrue(draftpage.IsElementPresent(By.XPath("//div[@class='b-datalist__empty__block']")), "Email was not sent");
+            Assert.IsTrue(draftpage.IsElementPresent(By.XPath(xpathEmptyDraftFolder)), "Email was not sent");
             SentPage sentpage = homepage.GoToSentPage();
             Assert.IsTrue(sentpage.CheckEmailSent(letter.Body), "Sent folder is empty, no email was sent");
             homepage.LogOff();

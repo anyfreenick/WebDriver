@@ -8,8 +8,15 @@ namespace WebDriver_Part1.tests
     [TestClass]
     public class DesignPatternsTests
     {
-        WebDriverSingleton _driver = WebDriverSingleton.GetInstance(DriverType.Firefox);
-        User user = new User("webdriver_bk.ru");
+        private WebDriverSingleton _driver;
+        private User user;
+
+        [TestInitialize]
+        public void TestSetup()
+        {
+            user = new User("webdriver_bk.ru");
+            _driver = WebDriverSingleton.GetInstance(DriverType.Firefox);
+        }
 
         [TestMethod]
         public void SingletonLoginLogOut()
