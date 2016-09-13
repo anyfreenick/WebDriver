@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebDriver_Part1.Utils;
+﻿using WebDriver_Part1.Utils;
 
 namespace WebDriver_Part1.BusinessObjects
 {
