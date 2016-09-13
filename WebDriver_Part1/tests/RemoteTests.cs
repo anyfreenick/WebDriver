@@ -17,32 +17,46 @@ namespace WebDriver_Part1.tests
 
         private IWebDriver driver;
 
+        DesiredCapabilities capabilities;
+
+        [TestInitialize]
+        public void TestSetup()
+        {
+            capabilities = DesiredCapabilities.Firefox();
+            capabilities.SetCapability(CapabilityType.BrowserName, "firefox");
+            driver = new RemoteWebDriver(new Uri(WDHub), capabilities);
+        }
+
         [TestMethod]
         public void RemoteWDTestOnWin()
         {
-            DesiredCapabilities capabilities = DesiredCapabilities.Firefox();
-            capabilities.SetCapability(CapabilityType.BrowserName, "firefox");
-            capabilities.SetCapability(CapabilityType.Platform, new Platform(PlatformType.Windows));
-            driver = new RemoteWebDriver(new Uri(WDHub), capabilities);
+            capabilities.SetCapability(CapabilityType.Platform, new Platform(PlatformType.Windows));            
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
             HomePage homepage = loginpage.LoginAs(login, password);
             Assert.IsTrue(homepage.LoggedIn(), "Login failed");
+            homepage.LogOff();
+            Assert.IsTrue(loginpage.LoggedOut(), "Log off failed");
         }
 
         [TestMethod]
         public void RemoteWDTestOnLinux()
         {
-            DesiredCapabilities capabilities = DesiredCapabilities.Firefox();
-            capabilities.SetCapability(CapabilityType.BrowserName, "firefox");
             capabilities.SetCapability(CapabilityType.Platform, new Platform(PlatformType.Linux));
-            driver = new RemoteWebDriver(new Uri(WDHub), capabilities);
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
             HomePage homepage = loginpage.LoginAs(login, password, domain);
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementIsVisible(By.Id("PH_logoutLink")));
             Assert.IsTrue(homepage.LoggedIn(), "Login failed");
+            homepage.LogOff();
+            Assert.IsTrue(loginpage.LoggedOut(), "Log off failed");
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            driver.Quit();
         }
     }
 }

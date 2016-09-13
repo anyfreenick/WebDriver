@@ -73,7 +73,7 @@
     <Compile Include="PageObjects\LoginPage.cs" />
     <Compile Include="PageObjects\NewEmailPage.cs" />
     <Compile Include="Patterns\Singleton\WebDriverSingleton.cs" />
-    <Compile Include="tests\DesignPatterns.cs" />
+    <Compile Include="tests\DesignPatternsTests.cs" />
     <Compile Include="tests\PageObjectPatternTests.cs" />
     <Compile Include="PageObjects\SentPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

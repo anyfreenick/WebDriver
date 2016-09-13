@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
 using WebDriver_Part1.PageObjects;
 
 namespace WebDriver_Part1.tests
@@ -18,13 +17,17 @@ namespace WebDriver_Part1.tests
         private const string bodyEmail = "Hello!!!\n\rThis email is sent automatically by selenium WebDriver!\n\rBest regards,\n\rSelenuim WebDriver.";        
 
         IWebDriver driver;
-        
-        
+
+        [TestInitialize]
+        public void TestSetup()
+        {
+            driver = new FirefoxDriver();
+            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+        }
+
         [TestMethod]
         public void RunPageObjectTest()
         {
-            driver = new ChromeDriver();
-            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
             HomePage homepage = loginpage.LoginAs(login, password);
@@ -44,27 +47,22 @@ namespace WebDriver_Part1.tests
             Assert.IsTrue(sentpage.CheckEmailSent(bodyEmail), "Sent folder is empty, no email was sent");
             homepage.LogOff();
             Assert.IsTrue(loginpage.LoggedOut(), "Log off failed");
-            driver.Quit();
         }
 
         [TestMethod]
         public void LoginLogout()
         {
-            driver = new FirefoxDriver();
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
             HomePage homepage = loginpage.LoginAs(login, password, domain);
             Assert.IsTrue(homepage.LoggedIn(), "Login failed");
             homepage.LogOff();
             Assert.IsTrue(loginpage.LoggedOut(), "Log off failed");
-            driver.Quit();
         }
 
         [TestMethod]
         public void ActionTestWithJS()
         {
-            driver = new FirefoxDriver();
-            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
             //Login button is being clicked with Javascript
@@ -87,6 +85,11 @@ namespace WebDriver_Part1.tests
             //Before clicking logoff button, the button is highlighted with red color
             homepage.LogOffWithHihgLight();
             Assert.IsTrue(loginpage.LoggedOut(), "Log off failed");
+        }
+
+        [TestCleanup]
+        public void TestCleanUp()
+        {
             driver.Quit();
         }
     }

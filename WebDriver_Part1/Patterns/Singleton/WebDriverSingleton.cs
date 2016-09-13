@@ -26,9 +26,6 @@ namespace WebDriver_Part1.Patterns.Singleton
                     case DriverType.Chrome:
                         instance.Driver = new ChromeDriver();
                         break;
-                    case DriverType.InternetExplorer:
-                        instance.Driver = new InternetExplorerDriver();
-                        break;
                     default:
                         instance.Driver = new FirefoxDriver();
                         break;
@@ -47,7 +44,6 @@ namespace WebDriver_Part1.Patterns.Singleton
     public enum DriverType
     {
         Firefox,
-        Chrome,
-        InternetExplorer
+        Chrome
     }
 }

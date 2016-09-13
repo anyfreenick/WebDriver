@@ -11,18 +11,25 @@ namespace WebDriver_Part1.tests
     public class TestBusinessObjects
     {
         IWebDriver driver;
+        User user;
+        Letter letter;
+
+        [TestInitialize]
+        public void TestSetup()
+        {
+            driver = new FirefoxDriver();
+            user = new User("webdriver_mail.ru");
+            letter = new Letter("sample_mail");
+        }
 
         [TestMethod]
         public void TestBO()
         {
-            driver = new FirefoxDriver();
-            User user = new User("webdriver_mail.ru");
-            Letter letter = new Letter("sample_mail");
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             LoginPage loginpage = new LoginPage(driver);
             loginpage.Open();
             HomePage homepage = loginpage.LoginAs(user.Login, user.Password, user.Domain);
-            Assert.IsTrue(homepage.LoggedIn(), "Login failde");
+            Assert.IsTrue(homepage.LoggedIn(), "Login failed");
             NewEmailPage newemail = homepage.CreateEmail();
             newemail.ComposeEmailAndSaveDraft(letter.Addressee, letter.Subject, letter.Body);
             //No any other waits handled this, only hardcoded wait
@@ -37,7 +44,12 @@ namespace WebDriver_Part1.tests
             SentPage sentpage = homepage.GoToSentPage();
             Assert.IsTrue(sentpage.CheckEmailSent(letter.Body), "Sent folder is empty, no email was sent");
             homepage.LogOff();
-            Assert.IsTrue(loginpage.LoggedOut(), "Log off failed");
+            Assert.IsTrue(loginpage.LoggedOut(), "Log off failed");            
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
             driver.Quit();
         }
     }

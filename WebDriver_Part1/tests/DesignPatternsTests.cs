@@ -6,9 +6,9 @@ using WebDriver_Part1.PageObjects;
 namespace WebDriver_Part1.tests
 {
     [TestClass]
-    public class DesignPatterns
+    public class DesignPatternsTests
     {
-        WebDriverSingleton _driver = WebDriverSingleton.GetInstance();
+        WebDriverSingleton _driver = WebDriverSingleton.GetInstance(DriverType.Firefox);
         User user = new User("webdriver_bk.ru");
 
         [TestMethod]
