@@ -29,7 +29,6 @@ namespace WebDriver_Part1.Patterns.Singleton
                     default:
                         instance.Driver = new FirefoxDriver();
                         break;
-
                 }
             }
             return instance;
