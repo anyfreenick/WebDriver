@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 
-namespace WebDriver_Part1.Patterns.Singleton
+namespace WebDriver_Part1.Patterns
 {
     public sealed class WebDriverSingleton
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebDriver_Part1.BusinessObjects;
-using WebDriver_Part1.Patterns.Singleton;
+using WebDriver_Part1.Patterns;
 using WebDriver_Part1.PageObjects;
 
 namespace WebDriver_Part1.tests
